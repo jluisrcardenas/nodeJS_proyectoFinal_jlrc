@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taller de Node.js S.A. de C.V.</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="../config/urls.js"></script>
+    <script src="./js/admin.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+</head>
+<body>
+  <div class="col-11 m-auto mt-3 row">
+    <h1>Bienvenido al sistema</h1>
+    <div class="card mt-2 col-md-5 p-0">
+        <div class="card-header">
+          <b>Agregar usuario</b>
+        </div>
+        <div class="card-body">
+            <form id="addUser-form">
+              <div class="row g-3 align-items-center mt-auto">
+                <div class="col-auto">
+                  <label for="nombre" class="col-form-label">Nombre <span class="text-danger">*</span></label>
+                </div>
+                <div class="col-auto">
+                  <input type="text" id="nombre" class="form-control" required>
+                </div>
+              </div>
+
+              <div class="row g-3 align-items-center mt-auto">
+                <div class="col-auto">
+                  <label for="apellidos" class="col-form-label">Apellidos <span class="text-danger">*</span></label>
+                </div>
+                <div class="col-auto">
+                  <input type="text" id="apellidos" class="form-control" required>
+                </div>
+              </div>
+
+              <div class="row g-3 align-items-center mt-auto">
+                <div class="col-auto">
+                  <label for="telefono" class="col-form-label">Telefono</label>
+                </div>
+                <div class="col-auto">
+                  <input type="tel" id="telefono" class="form-control" maxlength="10">
+                </div>
+              </div>
+
+              <div class="row g-3 align-items-center mt-auto">
+                <div class="col-auto">
+                  <label for="correo" class="col-form-label">Correo <span class="text-danger">*</span></label>
+                </div>
+                <div class="col-auto">
+                  <input type="email" id="correo" class="form-control" required>
+                </div>
+              </div>
+
+              <div class="row g-3 align-items-center mt-auto">
+                <div class="col-auto">
+                  <label for="direccion" class="col-form-label">Direccion</label>
+                </div>
+                <div class="col-auto">
+                  <input type="text" id="direccion" class="form-control">
+                </div>
+              </div>
+
+              <div class="mt-3">
+                <button id="addUser" type="button" class="btn btn-primary me-5">Agregar Usuario</button>
+              </div>
+            </form>
+      </div>
+    </div>
+
+    <div class="col-md-1"></div>
+
+    <div class="card mt-2 col-md-5 p-0">
+      <div class="card-header">
+        <b>Editar usuario</b>
+        <div>(Ingrese el correo y busque el usuario)</div>
+      </div>
+      <div class="card-body">
+          <form id="getUserInfo-form">
+            <div class="row g-3 align-items-center mt-auto">
+              <div class="col-auto">
+                <label for="nombreEdit" class="col-form-label">Nombre</label>
+              </div>
+              <div class="col-auto">
+                <input type="text" id="nombreEdit" class="form-control" disabled>
+              </div>
+            </div>
+
+            <div class="row g-3 align-items-center mt-auto">
+              <div class="col-auto">
+                <label for="apellidosEdit" class="col-form-label">Apellidos</label>
+              </div>
+              <div class="col-auto">
+                <input type="text" id="apellidosEdit" class="form-control" disabled>
+              </div>
+            </div>
+
+            <div class="row g-3 align-items-center mt-auto">
+              <div class="col-auto">
+                <label for="telefonoEdit" class="col-form-label">Telefono</label>
+              </div>
+              <div class="col-auto">
+                <input type="tel" id="telefonoEdit" class="form-control" maxlength="10" disabled>
+              </div>
+            </div>
+
+            <div class="row g-3 align-items-center mt-auto">
+              <div class="col-auto">
+                <label for="correoEdit" class="col-form-label">Correo <span class="text-danger">*</span></label>
+              </div>
+              <div class="col-auto">
+                <input type="email" id="correoEdit" class="form-control" required>
+              </div>
+            </div>
+
+            <div class="row g-3 align-items-center mt-auto">
+              <div class="col-auto">
+                <label for="direccionEdit" class="col-form-label">Direccion</label>
+              </div>
+              <div class="col-auto">
+                <input type="text" id="direccionEdit" class="form-control" disabled>
+              </div>
+            </div>
+
+            <div class="mt-3">
+              <button id="getUserInfo" type="button" class="btn btn-primary">Buscar Usuario</button>
+              <button id="saveUser" type="button" class="btn btn-primary" disabled>Guardar Usuario</button>
+            </div>
+            
+          </form>
+    </div>
+  </div>
+
+    <div class="card mt-3 col-md-5 p-0">
+      <div class="card-header">
+        <b>Eliminar usuario</b>
+      </div>
+      <div class="card-body">
+          <form id="deleteUser-form">
+            <div class="row g-3 align-items-center mt-auto">
+              <div class="col-auto">
+                <label for="correoDelete" class="col-form-label">Correo  <span class="text-danger">*</span></label>
+              </div>
+              <div class="col-auto">
+                <input type="text" id="correoDelete" class="form-control" required>
+              </div>
+            </div>
+
+            <div class="mt-3">
+              <button id="deleteUser" type="button" class="btn btn-primary">Eliminar Usuario</button>
+            </div>
+
+          </form>
+    </div>
+  </div>
+
+  <div class="col-md-1"></div>
+
+  <div class="card mt-3 col-md-5 p-0">
+    <div class="card-header">
+      <b>Buscar usuario</b>
+    </div>
+    <div class="card-body">
+        <form id="nameSearch-form">
+          <div class="row g-3 align-items-center mt-auto">
+            <div class="col-auto">
+              <label for="nombreSearch" class="col-form-label">Nombre  <span class="text-danger">*</span></label>
+            </div>
+            <div class="col-auto">
+              <input type="text" id="nombreSearch" class="form-control" required>
+            </div>
+          </div>
+
+          <div class="mt-3">
+            <button id="searchUser" type="button" class="btn btn-primary">Buscar Usuario</button>
+          </div>
+
+        </form>
+  </div>
+</div>
+
+  <div id="searchedUserDiv" class="card mt-2 col-md-11 p-0" hidden>
+    <div class="card-header">
+      <b>Usuarios buscados</b>
+    </div>
+    <div class="card-body" id="searchedUserBody">
+      
+    </div>
+  </div>
+
+  <div class="mt-2 p-0">
+    <button id="closeSession" type="button" class="btn btn-secondary me-5">Cerrar Sesion</button>
+
+    <span class="text-danger">*Requeridos en la sección</span>
+  </div>
+
+  </div>
+</body>
+</html>
